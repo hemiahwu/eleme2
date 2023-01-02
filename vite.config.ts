@@ -1,15 +1,18 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-// const path = require("path");
 import path from "path";
 import fs from "fs";
 
-// www.thenewstep.cn/frontend/vue/8000
-// localhost:5173/
-// https://vitejs.dev/config/
+import Components from "unplugin-vue-components/vite";
+import { VantResolver } from "unplugin-vue-components/resolvers";
+
 export default defineConfig({
-  // base: "/frontend/vue/8001/",
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    Components({
+      resolvers: [VantResolver()],
+    }),
+  ],
   // 配置别名
   resolve: {
     alias: {
