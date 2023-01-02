@@ -11,6 +11,31 @@
         搜索商家 商家名称
       </div>
     </div>
+
+    <!-- 轮播+分类 -->
+    <div id="container">
+      <!-- 轮播 -->
+      <van-swipe class="recommend" :autoplay="3000" lazy-render>
+        <van-swipe-item v-for="image in swipeImages" :key="image">
+          <img :src="image" />
+        </van-swipe-item>
+      </van-swipe>
+
+      <!-- 分类 -->
+      <van-swipe class="categories">
+        <van-swipe-item v-for="(category, index) in categories" :key="index">
+          <div class="entries" v-for="(item, i) in category" :key="i">
+            <div class="img-wrap">
+              <img :src="item.image" alt="" />
+            </div>
+            <span>{{ item.name }}</span>
+          </div>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+
+    <!-- 推荐商家 -->
+    <div class="recommend-seller">推荐商家</div>
   </div>
 </template>
 
@@ -33,7 +58,7 @@ onMounted(async () => {
   swipeImages.value = res.data.swipeImgs;
   categories.value = res.data.entries;
 
-  console.log(swipeImages, categories);
+  console.log(categories.value);
 });
 </script>
 
@@ -76,5 +101,69 @@ onMounted(async () => {
   position: sticky;
   top: 0px;
   z-index: 999;
+}
+
+/* 轮播样式 */
+.home-component .recommend .van-swipe-item {
+  height: 100px;
+}
+.home-component .recommend .van-swipe-item img {
+  width: 100%;
+  height: 100px;
+}
+
+/* 商品分类样式 */
+.home-component .categories {
+  background: #fff;
+  height: 47.2vw;
+  text-align: center;
+  overflow: hidden;
+}
+.home-component .categories .entries {
+  width: 20%;
+  float: left;
+  position: relative;
+  margin-top: 2.933333vw;
+}
+.home-component .categories .entries .img-wrap {
+  position: relative;
+  display: inline-block;
+  width: 12vw;
+  height: 12vw;
+}
+.home-component .categories .entries .img-wrap img {
+  width: 100%;
+  height: 100%;
+}
+.home-component .categories .entries span {
+  display: block;
+  color: #666;
+  font-size: 0.7rem;
+}
+
+/* 推荐商家 */
+.home-component .recommend-seller {
+  display: flex;
+  align-items: flex;
+  justify-content: center;
+  height: 9.6vw;
+  line-height: 9.6vw;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+}
+.home-component .recommend-seller:after,
+.home-component .recommend-seller:before {
+  display: block;
+  content: "一";
+  width: 5.333333vw;
+  height: 0.266667vw;
+  color: #999;
+}
+.home-component .recommend-seller:before {
+  margin-right: 3.466667vw;
+}
+.home-component .recommend-seller:after {
+  margin-left: 3.466667vw;
 }
 </style>
