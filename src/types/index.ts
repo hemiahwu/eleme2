@@ -46,8 +46,9 @@ export interface AreaList {
 }
 
 export interface NavTab {
-  icon: string;
   name: string;
+  icon?: string;
+  condition?: string;
 }
 
 interface Data {

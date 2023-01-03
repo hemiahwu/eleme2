@@ -36,10 +36,13 @@
 
     <!-- 推荐商家 -->
     <div class="recommend-seller">推荐商家</div>
+
+    <Navbar :navTab="navTab" />
   </div>
 </template>
 
 <script setup lang="ts">
+import Navbar from "@/components/Navbar.vue";
 import { useStore } from "../store/index";
 import { computed, onMounted, ref } from "vue";
 import axios from "../api/index";
