@@ -2,7 +2,13 @@
   <main class="navbar-component">
     <section v-if="navTab" class="content">
       <ul class="nav-items">
-        <li class="nav-item" v-for="(nav, i) in navTab" :key="i">
+        <li
+          class="nav-item"
+          :class="{ active: currentIndex === i }"
+          v-for="(nav, i) in navTab"
+          :key="i"
+          @click="handleChange(i)"
+        >
           <span>{{ nav.name }}</span>
           <i v-if="nav.icon" :class="'fa fa-' + nav.icon"></i>
         </li>
@@ -12,7 +18,14 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { NavTab } from "../types";
+
+const currentIndex = ref<number>(0);
+
+const handleChange = (index: number) => {
+  currentIndex.value = index;
+};
 
 defineProps<{
   navTab: NavTab[];
@@ -48,5 +61,10 @@ defineProps<{
   margin-bottom: 0.533333vw;
   fill: #333;
   will-change: transform;
+}
+
+.navbar-component .content .nav-items .active {
+  font-weight: 600;
+  color: #333;
 }
 </style>
