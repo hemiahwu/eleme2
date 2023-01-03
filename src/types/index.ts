@@ -44,3 +44,27 @@ export interface AreaList {
   location: string;
   name: string;
 }
+
+export interface NavTab {
+  icon: string;
+  name: string;
+}
+
+interface Data {
+  code: string;
+  icon?: string;
+  name: string;
+  select: boolean;
+}
+
+export interface ScreenBy {
+  data: Data;
+  id: string;
+  title: string;
+}
+
+export interface SortBy {
+  check: boolean;
+  code: string;
+  name: string;
+}

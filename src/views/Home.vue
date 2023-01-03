@@ -43,11 +43,14 @@
 import { useStore } from "../store/index";
 import { computed, onMounted, ref } from "vue";
 import axios from "../api/index";
-import { Categories } from "../types";
+import { Categories, NavTab, ScreenBy, SortBy } from "../types";
 
 // ref
 const swipeImages = ref<string[]>([]);
 const categories = ref<Array<Categories[]>>([]);
+const navTab = ref<NavTab[]>([]);
+const screenBy = ref<ScreenBy[]>([]);
+const sortBy = ref<SortBy[]>([]);
 
 const store = useStore();
 
@@ -59,7 +62,10 @@ onMounted(async () => {
   swipeImages.value = res.data.swipeImgs;
   categories.value = res.data.entries;
 
-  console.log(categories.value);
+  const res2 = await axios("/api/profile/filter");
+  navTab.value = res2.data.navTab;
+  screenBy.value = res2.data.screenBy;
+  sortBy.value = res2.data.sortBy;
 });
 </script>
 
