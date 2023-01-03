@@ -43,10 +43,11 @@
 import { useStore } from "../store/index";
 import { computed, onMounted, ref } from "vue";
 import axios from "../api/index";
+import { Categories } from "../types";
 
 // ref
 const swipeImages = ref<string[]>([]);
-const categories = ref<any>([]);
+const categories = ref<Array<Categories[]>>([]);
 
 const store = useStore();
 

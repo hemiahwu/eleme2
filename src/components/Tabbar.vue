@@ -16,13 +16,9 @@
 </template>
 
 <script setup lang="ts">
-interface tabbarDataProps {
-  title: string;
-  icon: string;
-  path: string;
-}
+import { TabbarData } from "../types";
 
-defineProps<{ data: tabbarDataProps[] }>();
+defineProps<{ data: TabbarData[] }>();
 </script>
 
 <style scoped>

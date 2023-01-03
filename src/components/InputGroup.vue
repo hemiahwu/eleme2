@@ -19,15 +19,9 @@
 </template>
 
 <script setup lang="ts">
-interface PropsType {
-  modelValue: string;
-  type: string;
-  placeholder: string;
-  btnTitle?: string;
-  disabled?: boolean;
-  error: string;
-}
-withDefaults(defineProps<PropsType>(), {
+import { InputGroup } from "../types";
+
+withDefaults(defineProps<InputGroup>(), {
   type: "",
   modelValue: "",
   placeholder: "",

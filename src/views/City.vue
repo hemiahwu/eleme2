@@ -37,6 +37,7 @@ import { useStore } from "../store/index";
 import axios from "../api/index";
 import { useRouter } from "vue-router";
 import _ from "lodash";
+import { Cities, City } from "../types";
 
 // 属性
 const cityValue = ref<string>("");
@@ -44,8 +45,8 @@ const store = useStore();
 const router = useRouter();
 const cities = ref({});
 const cityNames = ref<string[]>([]);
-const searchList = ref<cityType[]>([]);
-const allCities = ref<cityType[]>([]);
+const searchList = ref<City[]>([]);
+const allCities = ref<City[]>([]);
 
 // 计算属性
 const city = computed(() => store.city);
@@ -72,7 +73,7 @@ const getCityData = async () => {
 
   // 整合城市名字
   cityNames.value.forEach((key) => {
-    (cities.value as citiesType)[key].forEach((city: cityType) => {
+    (cities.value as Cities)[key].forEach((city: City) => {
       allCities.value.push(city);
     });
   });
@@ -84,28 +85,12 @@ const debounced = _.debounce(() => {
     searchList.value = [];
   } else {
     // 如果不为空,那就将包含对应值的内容过滤出来
-    searchList.value = allCities.value.filter((city: cityType) => {
+    searchList.value = allCities.value.filter((city: City) => {
       return city.name.indexOf(cityValue.value) != -1;
     });
   }
 }, 500);
 watch(cityValue, debounced);
-
-interface citiesType {
-  [_: string]: Array<cityType>;
-}
-
-interface cityType {
-  abbr: string;
-  area_code: string;
-  id: number;
-  is_map: boolean;
-  latitude: number;
-  longitude: number;
-  name: string;
-  pinyin: string;
-  sort: number;
-}
 </script>
 <style scoped>
 .city-component {

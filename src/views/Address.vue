@@ -38,30 +38,20 @@ import { useStore } from "../store/index";
 import { useRouter } from "vue-router";
 import _ from "lodash";
 import Location from "@/components/Location.vue";
+import { AreaList } from "../types";
 
 // 属性
 const searchValue = ref<string>("");
 const store = useStore();
 const router = useRouter();
-const areaList = ref<areaListTypes[] | []>([]);
+const areaList = ref<AreaList[] | []>([]);
 
 // 计算属性
 const city = computed(() => store.city);
 const address = computed(() => store.address);
 
-// 类型
-interface areaListTypes {
-  adcode: string;
-  address: Array<string>;
-  city: Array<string>;
-  district: string;
-  id: string;
-  location: string;
-  name: string;
-}
-
 // 方法
-const selectAddress = (item: areaListTypes | null) => {
+const selectAddress = (item: AreaList | null) => {
   item && store.handleAddress(item.district + item.address + item.name);
   !item && store.handleAddress(address.value);
   router.push("/home");

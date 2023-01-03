@@ -55,6 +55,7 @@
 <script setup lang="ts">
 import BScroll from "better-scroll";
 import { onMounted } from "vue";
+import { Cities } from "../types";
 
 onMounted(() => {
   new BScroll(".alphabet-component", {
@@ -78,25 +79,8 @@ const selectKey = (index: number) => {
   }
 };
 
-// 类型
-interface citiesType {
-  [_: string]: Array<cityType>;
-}
-// https://better-scroll.github.io/docs/zh-CN/guide/base-scroll-api.html
-// https://www.wenjiangs.com/doc/gqgs8mze
-interface cityType {
-  abbr: string;
-  area_code: string;
-  id: number;
-  is_map: boolean;
-  latitude: number;
-  longitude: number;
-  name: string;
-  pinyin: string;
-  sort: number;
-}
 defineProps<{
-  cities: citiesType;
+  cities: Cities;
   cityNames: string[];
 }>();
 </script>
