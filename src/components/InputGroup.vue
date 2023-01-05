@@ -19,16 +19,14 @@
 </template>
 
 <script setup lang="ts">
-import { InputGroup } from "../types";
-
-withDefaults(defineProps<InputGroup>(), {
-  type: "",
-  modelValue: "",
-  placeholder: "",
-  btnTitle: "",
-  disabled: false,
-  error: "",
-});
+defineProps<{
+  type: string;
+  modelValue: string;
+  placeholder: string;
+  btnTitle: string;
+  disabled: boolean;
+  error: string;
+}>();
 
 defineEmits(["btnClick", "update:modelValue"]);
 </script>
@@ -36,7 +34,6 @@ defineEmits(["btnClick", "update:modelValue"]);
 <style scoped>
 .input-group {
   border: 1px solid #ccc;
-
   border-radius: 4px;
   padding: 10px;
   display: flex;

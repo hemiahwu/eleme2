@@ -3,15 +3,6 @@ export interface Categories {
   name: string;
 }
 
-export interface InputGroup {
-  modelValue: string;
-  type: string;
-  placeholder: string;
-  btnTitle?: string;
-  disabled?: boolean;
-  error: string;
-}
-
 // 类型
 export interface Cities {
   [_: string]: Array<City>;
