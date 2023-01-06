@@ -42,11 +42,12 @@ export interface NavTab {
   condition?: string;
 }
 
-interface Data {
+export interface Data {
   code: string;
   icon?: any;
   name: string;
   select: boolean;
+  forEach: (a: any) => void;
 }
 
 export interface ScreenBy {

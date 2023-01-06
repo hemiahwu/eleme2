@@ -45,8 +45,6 @@
       :screenBy="screenBy"
       @handleCeiling="handleCeiling"
     />
-
-    <div id="container" style="height: 2000px"></div>
   </div>
 </template>
 

@@ -38,7 +38,12 @@
         >
           <p>{{ screen.title }}</p>
           <ul>
-            <li v-for="(condition, i) in screen.data" :key="i">
+            <li
+              @click="handleScreen(condition, screen)"
+              :class="{ selected: condition.select }"
+              v-for="(condition, i) in screen.data"
+              :key="i"
+            >
               <img v-if="condition.icon" :src="condition.icon" alt="" />
               <span>{{ condition.name }}</span>
             </li>
@@ -55,7 +60,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { NavTab, ScreenBy, SortBy } from "../types";
+import { Data, NavTab, ScreenBy, SortBy } from "../types";
 
 const currentIndex = ref<number>(0);
 const isOpen = ref<boolean>(false);
@@ -90,6 +95,15 @@ const hideMask = () => {
   isOpen.value = false;
   isScreen.value = false;
   emits("handleCeiling", false);
+};
+
+const handleScreen = (condition: Data, screen: ScreenBy) => {
+  if (screen.id !== "MPI") {
+    screen.data.forEach((item: Data) => {
+      item.select = false;
+    });
+  }
+  condition.select = !condition.select;
 };
 
 const props = defineProps<{
@@ -249,5 +263,10 @@ const emits = defineEmits(["handleCeiling"]);
   color: #fff;
   background: #00d762;
   border: 0.133333vw solid #00d762;
+}
+
+.navbar-component .screen-list .selected {
+  color: #3190e8 !important;
+  background-color: #edf5ff !important;
 }
 </style>
