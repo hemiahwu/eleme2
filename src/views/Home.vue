@@ -7,7 +7,7 @@
         <i class="fa fa-sort-desc"></i>
       </div>
     </div>
-    <div class="search-wrap" :class="{ ceiling: true }">
+    <div class="search-wrap" :class="{ ceiling: isCeiling }">
       <div class="shop-search">
         <i class="fa fa-search"></i>
         搜索商家 商家名称
@@ -39,7 +39,7 @@
     <!-- 推荐商家 -->
     <div class="recommend-seller">推荐商家</div>
 
-    <Navbar :navTab="navTab" />
+    <Navbar :navTab="navTab" @handleCeiling="handleCeiling" />
 
     <div id="container" style="height: 2000px"></div>
   </div>
@@ -58,6 +58,7 @@ const categories = ref<Array<Categories[]>>([]);
 const navTab = ref<NavTab[]>([]);
 const screenBy = ref<ScreenBy[]>([]);
 const sortBy = ref<SortBy[]>([]);
+const isCeiling = ref<boolean>(false);
 
 const store = useStore();
 
@@ -74,6 +75,11 @@ onMounted(async () => {
   screenBy.value = res2.data.screenBy;
   sortBy.value = res2.data.sortBy;
 });
+
+// methods
+const handleCeiling = (showing: boolean) => {
+  isCeiling.value = showing;
+};
 </script>
 
 <style scoped>

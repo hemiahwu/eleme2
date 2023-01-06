@@ -1,5 +1,9 @@
 <template>
-  <main class="navbar-component" :class="{ 'open-mask': true }">
+  <main
+    class="navbar-component"
+    :class="{ 'open-mask': isOpen }"
+    @click.self="hideMask"
+  >
     <section v-if="navTab" class="content">
       <ul class="nav-items">
         <li
@@ -22,14 +26,25 @@ import { ref } from "vue";
 import { NavTab } from "../types";
 
 const currentIndex = ref<number>(0);
+const isOpen = ref<boolean>(false);
 
 const handleChange = (index: number) => {
   currentIndex.value = index;
+  isOpen.value = true;
+
+  emits("handleCeiling", true);
+};
+
+const hideMask = () => {
+  isOpen.value = false;
+  emits("handleCeiling", false);
 };
 
 defineProps<{
   navTab: NavTab[];
 }>();
+
+const emits = defineEmits(["handleCeiling"]);
 </script>
 
 <style scoped>
