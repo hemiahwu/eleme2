@@ -1,7 +1,7 @@
 <template>
   <main
     class="navbar-component"
-    :class="{ 'open-mask': isOpen }"
+    :class="{ 'open-mask': isOpen || isScreen }"
     @click.self="hideMask"
   >
     <section v-if="navTab" class="content">
@@ -29,7 +29,7 @@
     </section>
 
     <!-- 筛选列表 -->
-    <section class="screen-list">
+    <section class="screen-list" v-if="isScreen">
       <div class="screen-info">
         <article
           class="screen-item"
@@ -64,8 +64,17 @@ const isScreen = ref<boolean>(false);
 
 const handleChange = (index: number) => {
   currentIndex.value = index;
-  isOpen.value = true;
-  emits("handleCeiling", true);
+  if (index == 0) {
+    isScreen.value = false;
+    isOpen.value = true;
+    emits("handleCeiling", true);
+  } else if (index == 3) {
+    isOpen.value = false;
+    isScreen.value = true;
+    emits("handleCeiling", true);
+  } else {
+    hideMask();
+  }
 };
 
 const handleSelect = (index: number) => {
@@ -79,6 +88,7 @@ const handleSelect = (index: number) => {
 
 const hideMask = () => {
   isOpen.value = false;
+  isScreen.value = false;
   emits("handleCeiling", false);
 };
 
