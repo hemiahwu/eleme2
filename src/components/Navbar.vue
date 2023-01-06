@@ -1,5 +1,5 @@
 <template>
-  <main class="navbar-component">
+  <main class="navbar-component" :class="{ 'open-mask': true }">
     <section v-if="navTab" class="content">
       <ul class="nav-items">
         <li
@@ -66,5 +66,17 @@ defineProps<{
 .navbar-component .content .nav-items .active {
   font-weight: 600;
   color: #333;
+}
+
+/* 蒙版样式效果 */
+.navbar-component.open-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+  z-index: 3;
 }
 </style>

@@ -6,6 +6,8 @@
         <span>{{ address }}</span>
         <i class="fa fa-sort-desc"></i>
       </div>
+    </div>
+    <div class="search-wrap" :class="{ ceiling: true }">
       <div class="shop-search">
         <i class="fa fa-search"></i>
         搜索商家 商家名称
@@ -38,6 +40,8 @@
     <div class="recommend-seller">推荐商家</div>
 
     <Navbar :navTab="navTab" />
+
+    <div id="container" style="height: 2000px"></div>
   </div>
 </template>
 
@@ -99,7 +103,6 @@ onMounted(async () => {
   text-overflow: ellipsis;
 }
 .home-component .shop-search {
-  margin-top: 10px;
   background-color: #fff;
   padding: 10px 0;
   border-radius: 4px;
@@ -175,5 +178,11 @@ onMounted(async () => {
 }
 .home-component .recommend-seller:after {
   margin-left: 3.466667vw;
+}
+
+.home-component .ceiling {
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>
