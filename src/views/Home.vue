@@ -39,7 +39,12 @@
     <!-- 推荐商家 -->
     <div class="recommend-seller">推荐商家</div>
 
-    <Navbar :navTab="navTab" :sortBy="sortBy" @handleCeiling="handleCeiling" />
+    <Navbar
+      :navTab="navTab"
+      :sortBy="sortBy"
+      :screenBy="screenBy"
+      @handleCeiling="handleCeiling"
+    />
 
     <div id="container" style="height: 2000px"></div>
   </div>
@@ -74,6 +79,8 @@ onMounted(async () => {
   navTab.value = res2.data.navTab;
   screenBy.value = res2.data.screenBy;
   sortBy.value = res2.data.sortBy;
+
+  console.log(screenBy.value);
 });
 
 // methods

@@ -27,21 +27,44 @@
         </li>
       </ul>
     </section>
+
+    <!-- 筛选列表 -->
+    <section class="screen-list">
+      <div class="screen-info">
+        <article
+          class="screen-item"
+          v-for="(screen, index) in screenBy"
+          :key="index"
+        >
+          <p>{{ screen.title }}</p>
+          <ul>
+            <li v-for="(condition, i) in screen.data" :key="i">
+              <img v-if="condition.icon" :src="condition.icon" alt="" />
+              <span>{{ condition.name }}</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+      <div class="button-container">
+        <button class="clear">清空</button>
+        <button class="ok">确定</button>
+      </div>
+    </section>
   </main>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { NavTab, SortBy } from "../types";
+import { NavTab, ScreenBy, SortBy } from "../types";
 
 const currentIndex = ref<number>(0);
 const isOpen = ref<boolean>(false);
 const sortIndex = ref<number>(1);
+const isScreen = ref<boolean>(false);
 
 const handleChange = (index: number) => {
   currentIndex.value = index;
   isOpen.value = true;
-
   emits("handleCeiling", true);
 };
 
@@ -62,6 +85,7 @@ const hideMask = () => {
 const props = defineProps<{
   navTab: NavTab[];
   sortBy: SortBy[];
+  screenBy: ScreenBy[];
 }>();
 
 const emits = defineEmits(["handleCeiling"]);
@@ -140,5 +164,80 @@ const emits = defineEmits(["handleCeiling"]);
 
 .navbar-component.open-mask .sort-list .selectName {
   color: #009eef;
+}
+
+/* 筛选 */
+.navbar-component .screen-list {
+  background-color: #fff;
+  color: #333;
+  padding-top: 2.133333vw;
+  margin-top: 54px;
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  left: 0;
+}
+.navbar-component .screen-list .screen-info {
+  background: #fff;
+  padding: 0 2.666667vw;
+  line-height: normal;
+}
+.navbar-component .screen-list .screen-info .screen-item {
+  margin: 2.666667vw 0;
+  overflow: hidden;
+}
+.navbar-component .screen-list .screen-info .screen-item .title {
+  margin-bottom: 2vw;
+  color: #666;
+  font-size: 0.5rem;
+}
+.navbar-component .screen-list .screen-info .screen-item ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+.navbar-component .screen-list .screen-info .screen-item li {
+  box-sizing: border-box;
+  width: 30%;
+  height: 9.333333vw;
+  line-height: 9.333333vw;
+  margin: 0.8vw 1%;
+  background: #fafafa;
+}
+.navbar-component .screen-list .screen-info .screen-item li img {
+  width: 3.466667vw;
+  height: 3.466667vw;
+  vertical-align: middle;
+  margin-right: 0.8vw;
+}
+.navbar-component .screen-list .screen-info .screen-item li span {
+  margin-left: 2%;
+  vertical-align: middle;
+}
+
+.navbar-component .screen-list .button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fafafa;
+  box-shadow: 0 -0.266667vw 0.533333vw 0 #ededed;
+  line-height: 11.466667vw;
+  box-sizing: border-box;
+}
+.navbar-component .screen-list .button-container button {
+  font-size: 0.826667rem;
+  text-align: center;
+  text-decoration: none;
+  flex: 1;
+}
+.navbar-component .screen-list .button-container .clear {
+  color: #ddd;
+  background: #fff;
+}
+.navbar-component .screen-list .button-container .ok {
+  color: #fff;
+  background: #00d762;
+  border: 0.133333vw solid #00d762;
 }
 </style>

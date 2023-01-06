@@ -44,7 +44,7 @@ export interface NavTab {
 
 interface Data {
   code: string;
-  icon?: string;
+  icon?: any;
   name: string;
   select: boolean;
 }
