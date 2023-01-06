@@ -18,15 +18,25 @@
         </li>
       </ul>
     </section>
+    <!-- 排序列表 -->
+    <section class="sort-list" v-if="isOpen">
+      <ul>
+        <li @click="handleSelect(i)" v-for="(item, i) in sortBy" :key="i">
+          <span :class="{ selectName: sortIndex === i }">{{ item.name }}</span>
+          <i v-show="sortIndex === i" class="fa fa-check"></i>
+        </li>
+      </ul>
+    </section>
   </main>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { NavTab } from "../types";
+import { NavTab, SortBy } from "../types";
 
 const currentIndex = ref<number>(0);
 const isOpen = ref<boolean>(false);
+const sortIndex = ref<number>(1);
 
 const handleChange = (index: number) => {
   currentIndex.value = index;
@@ -35,13 +45,23 @@ const handleChange = (index: number) => {
   emits("handleCeiling", true);
 };
 
+const handleSelect = (index: number) => {
+  sortIndex.value = index;
+
+  //  更改综合排序title
+  props.navTab[0].name = props.sortBy[index].name;
+
+  hideMask();
+};
+
 const hideMask = () => {
   isOpen.value = false;
   emits("handleCeiling", false);
 };
 
-defineProps<{
+const props = defineProps<{
   navTab: NavTab[];
+  sortBy: SortBy[];
 }>();
 
 const emits = defineEmits(["handleCeiling"]);
@@ -93,5 +113,32 @@ const emits = defineEmits(["handleCeiling"]);
   background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
   z-index: 3;
+}
+
+/* 排序列表 */
+.navbar-component.open-mask .sort-list {
+  background-color: #fff;
+  color: #333;
+  padding-top: 2.133333vw;
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  left: 0;
+}
+.navbar-component.open-mask .sort-list li {
+  position: relative;
+  padding-left: 5.333333vw;
+  line-height: 10.666667vw;
+  overflow: hidden;
+}
+.navbar-component.open-mask .sort-list .fa-check {
+  float: right;
+  color: #009eef;
+  margin-right: 3.733333vw;
+  line-height: 10.666667vw;
+}
+
+.navbar-component.open-mask .sort-list .selectName {
+  color: #009eef;
 }
 </style>
