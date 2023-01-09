@@ -13,13 +13,15 @@
         <!-- 2 星级 -->
         <div class="restaurant-items">
           <div>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
+            <Rating :rating="item.restaurant.rating" />
+            <!-- <van-rate
+              v-model="item.restaurant.rating"
+              :size="25"
+              color="#ffd21e"
+              void-icon="star"
+              void-color="#eee"
+              allow-half
+            /> -->
             <span class="rate">{{ item.restaurant.rating }}</span>
             <span>月售{{ item.restaurant.recent_order_num }}单</span>
           </div>
@@ -50,7 +52,7 @@
 
 <script setup lang="ts">
 import { RestaurantType } from "../types/restaurantType";
-
+import Rating from "@/components/Rating.vue";
 defineProps<{
   restaurants: RestaurantType[];
 }>();
@@ -142,11 +144,5 @@ defineProps<{
   background-color: #2395ff;
   padding: 2px;
   box-sizing: border-box;
-}
-
-.restaurant-component .rating {
-  margin-right: 1.066667vw;
-  color: #ffbe00;
-  display: inline-block;
 }
 </style>
