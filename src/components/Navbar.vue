@@ -79,6 +79,7 @@ const handleChange = (index: number) => {
     isScreen.value = true;
     emits("handleCeiling", true);
   } else {
+    emits("updateSorting", props.navTab[index].condition);
     hideMask();
   }
 };
@@ -113,7 +114,7 @@ const props = defineProps<{
   screenBy: ScreenBy[];
 }>();
 
-const emits = defineEmits(["handleCeiling"]);
+const emits = defineEmits(["handleCeiling", "updateSorting"]);
 </script>
 
 <style scoped>

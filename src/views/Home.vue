@@ -44,6 +44,7 @@
       :sortBy="sortBy"
       :screenBy="screenBy"
       @handleCeiling="handleCeiling"
+      @updateSorting="updateSorting"
     />
     <!-- 商家列表 -->
     <Restaurants :restaurants="restaurants" />
@@ -67,6 +68,7 @@ const screenBy = ref<ScreenBy[]>([]);
 const sortBy = ref<SortBy[]>([]);
 const isCeiling = ref<boolean>(false);
 const restaurants = ref<RestaurantType[]>([]);
+const sortCondition = ref<string>("");
 
 const store = useStore();
 
@@ -83,13 +85,24 @@ onMounted(async () => {
   screenBy.value = res2.data.screenBy;
   sortBy.value = res2.data.sortBy;
 
-  const res3 = await axios.post("/api/profile/restaurants/1/10");
-  restaurants.value = res3.data;
+  loadData();
 });
 
 // methods
+const loadData = async () => {
+  const res3 = await axios.post("/api/profile/restaurants/1/10", {
+    condition: sortCondition.value,
+  });
+  restaurants.value = res3.data;
+};
 const handleCeiling = (showing: boolean) => {
   isCeiling.value = showing;
+};
+
+const updateSorting = (condition: string) => {
+  sortCondition.value = condition;
+  // 重新拉去商家列表数据
+  loadData();
 };
 </script>
 
