@@ -2,16 +2,13 @@
   <section class="restaurant-component">
     <div class="restaurant-info" v-for="(item, i) in restaurants" :key="i">
       <div class="restaurant-logo">
-        <img
-          src="https://fuss10.elemecdn.com/0/f7/26f44c0fef6afc5a5adf9b8b3f968jpeg.jpeg"
-          alt=""
-        />
+        <img :src="item.restaurant.image_path" alt="logo" />
       </div>
       <div class="restaurant-content">
         <!-- 1 品牌 -->
         <div class="restaurant-name">
-          <i>品牌</i>
-          <span>杨国福麻辣烫</span>
+          <i v-if="item.restaurant.is_premium">品牌</i>
+          <span>{{ item.restaurant.name }}</span>
         </div>
         <!-- 2 星级 -->
         <div class="restaurant-items">
@@ -23,23 +20,27 @@
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
             </div>
-            <span class="rate">4.6</span>
-            <span>月售4145单</span>
+            <span class="rate">{{ item.restaurant.rating }}</span>
+            <span>月售{{ item.restaurant.recent_order_num }}单</span>
           </div>
-          <div class="special-delivery" v-if="true">
-            <span class="icon-hollow">蜂鸟专送</span>
+          <div class="special-delivery" v-if="item.restaurant.delivery_mode">
+            <span class="icon-hollow">{{
+              item.restaurant.delivery_mode.text
+            }}</span>
           </div>
         </div>
         <!-- 3 配送 -->
         <div class="restaurant-delivery">
           <div>
-            <span class="delivery-fee">¥ 20 起送</span>
-            <span>配送费 ¥2.5</span>
+            <span class="delivery-fee"
+              >¥ {{ item.restaurant.float_minimum_order_amount }} 起送</span
+            >
+            <span>配送费 ¥{{ item.restaurant.float_delivery_fee }}</span>
           </div>
           <div class="distance">
-            <span> 2.14 km</span>
+            <span> {{ (item.restaurant.distance / 1000).toFixed(2) }} km</span>
             |
-            <span>47分钟</span>
+            <span>{{ item.restaurant.order_lead_time }}分钟</span>
           </div>
         </div>
       </div>
