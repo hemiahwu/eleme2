@@ -54,6 +54,7 @@ import { useStore } from "../store/index";
 import { computed, onMounted, ref } from "vue";
 import axios from "../api/index";
 import { Categories, NavTab, ScreenBy, SortBy } from "../types";
+import { RestaurantType } from "../types/restaurantType";
 
 // ref
 const swipeImages = ref<string[]>([]);
@@ -62,6 +63,7 @@ const navTab = ref<NavTab[]>([]);
 const screenBy = ref<ScreenBy[]>([]);
 const sortBy = ref<SortBy[]>([]);
 const isCeiling = ref<boolean>(false);
+const restaurants = ref<RestaurantType[]>([]);
 
 const store = useStore();
 
@@ -78,7 +80,8 @@ onMounted(async () => {
   screenBy.value = res2.data.screenBy;
   sortBy.value = res2.data.sortBy;
 
-  console.log(screenBy.value);
+  const res3 = await axios.post("/api/profile/restaurants/1/10");
+  restaurants.value = res3.data;
 });
 
 // methods

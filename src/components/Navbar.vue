@@ -4,6 +4,7 @@
     :class="{ 'open-mask': isOpen || isScreen }"
     @click.self="hideMask"
   >
+    <!-- 导航 -->
     <section v-if="navTab" class="content">
       <ul class="nav-items">
         <li
