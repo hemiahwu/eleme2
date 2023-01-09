@@ -38,18 +38,21 @@
 
     <!-- 推荐商家 -->
     <div class="recommend-seller">推荐商家</div>
-
+    <!-- 导航 -->
     <Navbar
       :navTab="navTab"
       :sortBy="sortBy"
       :screenBy="screenBy"
       @handleCeiling="handleCeiling"
     />
+    <!-- 商家列表 -->
+    <Restaurants :restaurants="restaurants" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Navbar from "@/components/Navbar.vue";
+import Restaurants from "@/components/Restaurants.vue";
 import { useStore } from "../store/index";
 import { computed, onMounted, ref } from "vue";
 import axios from "../api/index";

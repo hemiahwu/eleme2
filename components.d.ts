@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     InputGroup: typeof import('./src/components/InputGroup.vue')['default']
     Location: typeof import('./src/components/Location.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
+    Restaurants: typeof import('./src/components/Restaurants.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Tabbar: typeof import('./src/components/Tabbar.vue')['default']

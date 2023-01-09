@@ -117,7 +117,7 @@ const emits = defineEmits(["handleCeiling"]);
 </script>
 
 <style scoped>
-.navbar-component .content {
+.navbar-component {
   background: #fff;
   position: sticky;
   top: 54px;
@@ -196,7 +196,6 @@ const emits = defineEmits(["handleCeiling"]);
   background-color: #fff;
   color: #333;
   padding-top: 2.133333vw;
-  margin-top: 54px;
   position: absolute;
   width: 100%;
   z-index: 4;
