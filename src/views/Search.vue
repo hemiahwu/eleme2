@@ -29,12 +29,18 @@ const words = ref<string[]>([]);
 
 const debounced = _.debounce(async () => {
   try {
+    if (!keyword.value) {
+      searchRestaurants.value = [];
+      words.value = [];
+      return;
+    }
     const res = await axios(`/api/profile/typeahead/${keyword.value}`);
     searchRestaurants.value = res.data.restaurants;
     words.value = res.data.words;
-    console.log(searchRestaurants.value);
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
   }
 }, 500);
 
@@ -52,6 +58,9 @@ watch(keyword, debounced);
   margin-top: 45px;
   background: #fff;
   padding: 0 4.266667vw;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
 }
 .search .search-header .search-wrap {
   padding: 2.933333vw 2.933333vw 2.933333vw 0;

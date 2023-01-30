@@ -31,6 +31,7 @@ defineProps<{
   width: 100%;
   height: calc(100% - 95px);
   overflow: auto;
+  margin-top: 85px;
 }
 .restaurant-list li {
   padding: 0 4.266667vw;
