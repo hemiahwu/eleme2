@@ -22,7 +22,7 @@
     <!-- 排序列表 -->
     <section class="sort-list" v-if="isOpen">
       <ul>
-        <li @click="handleSelect(i)" v-for="(item, i) in sortBy" :key="i">
+        <li @click="handleSelect(i, item)" v-for="(item, i) in sortBy" :key="i">
           <span :class="{ selectName: sortIndex === i }">{{ item.name }}</span>
           <i v-show="sortIndex === i" class="fa fa-check"></i>
         </li>
@@ -84,11 +84,13 @@ const handleChange = (index: number) => {
   }
 };
 
-const handleSelect = (index: number) => {
+const handleSelect = (index: number, item: SortBy) => {
   sortIndex.value = index;
 
   //  更改综合排序title
   props.navTab[0].name = props.sortBy[index].name;
+
+  emits("updateSorting", item.code);
 
   hideMask();
 };
@@ -161,7 +163,7 @@ const emits = defineEmits(["handleCeiling", "updateSorting"]);
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease-in-out;
+  /* transition: all 0.3s ease-in-out; */
   z-index: 3;
 }
 
