@@ -7,7 +7,11 @@
         <i class="fa fa-sort-desc"></i>
       </div>
     </div>
-    <div class="search-wrap" :class="{ ceiling: isCeiling }">
+    <div
+      class="search-wrap"
+      @click="$router.push('/search')"
+      :class="{ ceiling: isCeiling }"
+    >
       <div class="shop-search">
         <i class="fa fa-search"></i>
         搜索商家 商家名称
