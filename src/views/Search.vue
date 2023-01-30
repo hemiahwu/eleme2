@@ -13,8 +13,26 @@
 
 <script setup lang="ts">
 import Header from "../components/Header.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import axios from "../api/index";
+import { SearchRestaurants } from "../types/restaurantType";
+import _ from "lodash";
+
 const keyword = ref<string>("");
+const searchRestaurants = ref<SearchRestaurants[]>([]);
+const words = ref<string[]>([]);
+
+const debounced = _.debounce(async () => {
+  try {
+    const res = await axios(`/api/profile/typeahead/${keyword.value}`);
+    searchRestaurants.value = res.data.restaurants;
+    words.value = res.data.words;
+  } catch (error) {
+    console.log(error);
+  }
+}, 500);
+
+watch(keyword, debounced);
 </script>
 
 <style scoped>

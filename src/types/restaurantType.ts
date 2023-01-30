@@ -136,3 +136,22 @@ type Gradient = {
   rgb_from: string;
   rgb_to: string;
 };
+
+export interface SearchRestaurants {
+  distance: string;
+  float_delivery_fee: number;
+  float_minimum_order_amount: number;
+  id: string;
+  image_path: string;
+  name: string;
+  rating: number;
+  recent_order_num: number;
+  scheme: string;
+  type: number;
+  tags: Tags[];
+}
+
+export interface Tags {
+  name: string;
+  name_color: string;
+}
