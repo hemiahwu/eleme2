@@ -47,11 +47,10 @@ export interface Data {
   icon?: any;
   name: string;
   select: boolean;
-  forEach: (a: any) => void;
 }
 
 export interface ScreenBy {
-  data: Data;
+  data: Data[];
   id: string;
   title: string;
 }

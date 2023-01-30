@@ -52,7 +52,13 @@
         </article>
       </div>
       <div class="button-container">
-        <button class="clear">清空</button>
+        <button
+          @click="handleClear"
+          class="clear"
+          :class="{ 'is-disable': toggleDisable }"
+        >
+          清空
+        </button>
         <button class="ok">确定</button>
       </div>
     </section>
@@ -60,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { Data, NavTab, ScreenBy, SortBy } from "../types";
 
 const currentIndex = ref<number>(0);
@@ -109,6 +115,19 @@ const handleScreen = (condition: Data, screen: ScreenBy) => {
   }
   condition.select = !condition.select;
 };
+
+const handleClear = () => {
+  props.screenBy.forEach((screen: ScreenBy) => {
+    return screen.data.forEach((item: Data) => (item.select = false));
+  });
+};
+
+// computed
+const toggleDisable = computed(() => {
+  return props.screenBy.some((screen: ScreenBy) => {
+    return screen.data.some((item: Data) => item.select);
+  });
+});
 
 const props = defineProps<{
   navTab: NavTab[];
@@ -271,5 +290,9 @@ const emits = defineEmits(["handleCeiling", "updateSorting"]);
 .navbar-component .screen-list .selected {
   color: #3190e8 !important;
   background-color: #edf5ff !important;
+}
+
+.navbar-component .screen-list .is-disable {
+  color: #333 !important;
 }
 </style>
