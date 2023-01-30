@@ -59,7 +59,7 @@
         >
           清空
         </button>
-        <button class="ok">确定</button>
+        <button @click="handleOk" class="ok">确定</button>
       </div>
     </section>
   </main>
@@ -120,6 +120,39 @@ const handleClear = () => {
   props.screenBy.forEach((screen: ScreenBy) => {
     return screen.data.forEach((item: Data) => (item.select = false));
   });
+};
+
+const handleOk = () => {
+  interface ScreenData {
+    MPI: string | string[];
+    offer: string | string[];
+    per: string | string[];
+  }
+  const screenData: ScreenData = {
+    MPI: "",
+    offer: "",
+    per: "",
+  };
+
+  props.screenBy.forEach((screen: ScreenBy) => {
+    const selected =
+      screen.id === "MPI"
+        ? screen.data
+            .filter((item: Data) => item.select)
+            .map((item: Data) => item.code)
+        : screen.data.find((item: Data) => item.select)?.code || "";
+
+    screenData[screen.id as keyof ScreenData] = selected;
+  });
+
+  // const str = "delivery_mode,is_premium,rating,distance";
+  let condition = [screenData.MPI, screenData.offer, screenData.per]
+    .filter(Boolean)
+    .join(",")
+    .replace(/^,/, "");
+
+  emits("updateSorting", condition);
+  hideMask();
 };
 
 // computed
