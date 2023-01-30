@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     Restaurants: typeof import('./src/components/Restaurants.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchRestaurantList: typeof import('./src/components/SearchRestaurantList.vue')['default']
     Tabbar: typeof import('./src/components/Tabbar.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanRate: typeof import('vant/es')['Rate']

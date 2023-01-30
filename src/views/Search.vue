@@ -8,11 +8,16 @@
         <button>搜索</button>
       </form>
     </div>
+    <SearchRestaurantList
+      :searchRestaurants="searchRestaurants"
+      :words="words"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import Header from "../components/Header.vue";
+import SearchRestaurantList from "../components/SearchRestaurantList.vue";
 import { ref, watch } from "vue";
 import axios from "../api/index";
 import { SearchRestaurants } from "../types/restaurantType";
@@ -27,6 +32,7 @@ const debounced = _.debounce(async () => {
     const res = await axios(`/api/profile/typeahead/${keyword.value}`);
     searchRestaurants.value = res.data.restaurants;
     words.value = res.data.words;
+    console.log(searchRestaurants.value);
   } catch (error) {
     console.log(error);
   }
