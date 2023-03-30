@@ -23,8 +23,8 @@ defineProps<{
   type: string;
   modelValue: string;
   placeholder: string;
-  btnTitle: string;
-  disabled: boolean;
+  btnTitle?: string;
+  disabled?: boolean;
   error: string;
 }>();
 
