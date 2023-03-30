@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: "/shop",
-    component: () => import("@/views/Goods.vue"),
+    component: () => import("@/views/shop/Shop.vue"),
   },
 ];
 

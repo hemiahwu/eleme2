@@ -1,6 +1,11 @@
 <template>
   <section class="restaurant-component">
-    <div class="restaurant-info" v-for="(item, i) in restaurants" :key="i">
+    <div
+      class="restaurant-info"
+      @click="$router.push('/shop')"
+      v-for="(item, i) in restaurants"
+      :key="i"
+    >
       <div class="restaurant-logo">
         <img :src="item.restaurant.image_path" alt="logo" />
       </div>
