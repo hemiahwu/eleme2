@@ -11,6 +11,7 @@
     <SearchRestaurantList
       :searchRestaurants="searchRestaurants"
       :words="words"
+      @click="$router.push('/goods')"
     />
   </div>
 </template>
